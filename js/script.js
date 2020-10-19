@@ -427,6 +427,13 @@ window.addEventListener('DOMContentLoaded', () => {
     dots.push(dot);
   }
 
+  function changeOpacity(dots) {
+    dots.forEach(dot => {
+      dot.style.opacity = '0.5';
+      dots[slideIndex - 1].style.opacity = '1';
+    });
+  }
+
   sliderNext.addEventListener('click', () => {
     if (offset === +width.replace(/\D/g, '') * (slides.length - 1)) {
       offset = 0;
@@ -447,10 +454,7 @@ window.addEventListener('DOMContentLoaded', () => {
       current.textContent = slideIndex;
     }
 
-    dots.forEach(dot => {
-      dot.style.opacity = '0.5';
-      dots[slideIndex - 1].style.opacity = '1';
-    });
+    changeOpacity(dots);
   });
 
   sliderPrev.addEventListener('click', () => {
@@ -473,10 +477,7 @@ window.addEventListener('DOMContentLoaded', () => {
       current.textContent = slideIndex;
     }
 
-    dots.forEach(dot => {
-      dot.style.opacity = '0.5';
-      dots[slideIndex - 1].style.opacity = '1';
-    });
+    changeOpacity(dots);
   });
 
   dots.forEach(dot => {
@@ -494,10 +495,7 @@ window.addEventListener('DOMContentLoaded', () => {
         current.textContent = slideIndex;
       }
 
-      dots.forEach(dot => {
-        dot.style.opacity = '0.5';
-        dots[slideIndex - 1].style.opacity = '1';
-      });
+      changeOpacity(dots);
     });
   });
 
