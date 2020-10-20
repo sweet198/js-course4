@@ -427,22 +427,26 @@ window.addEventListener('DOMContentLoaded', () => {
     dots.push(dot);
   }
 
-  function changeOpacity(dots) {
+  function changeOpacity() {
     dots.forEach(dot => {
       dot.style.opacity = '0.5';
       dots[slideIndex - 1].style.opacity = '1';
     });
   }
 
+  function makeNumber (str) {
+    return +str.replace(/\D/g, '');
+  }
+
   sliderNext.addEventListener('click', () => {
-    if (offset === +width.replace(/\D/g, '') * (slides.length - 1)) {
+    if (offset === makeNumber(width) * (slides.length - 1)) {
       offset = 0;
     } else {
-      offset += +width.replace(/\D/g, '');
+      offset += makeNumber(width);
     }
     slidesField.style.transform = `translateX(-${offset}px)`;
 
-    if (slideIndex === slides.length) {
+    if (slideIndex == slides.length) {
       slideIndex = 1;
     } else {
       slideIndex += 1;
@@ -454,18 +458,18 @@ window.addEventListener('DOMContentLoaded', () => {
       current.textContent = slideIndex;
     }
 
-    changeOpacity(dots);
+    changeOpacity();
   });
 
   sliderPrev.addEventListener('click', () => {
     if (offset === 0) {
-      offset = +width.replace(/\D/g, '') * (slides.length - 1);
+      offset = makeNumber(width) * (slides.length - 1);
     } else {
-      offset -= +width.replace(/\D/g, '');
+      offset -= makeNumber(width);
     }
     slidesField.style.transform = `translateX(-${offset}px)`;
 
-    if (slideIndex === 1) {
+    if (slideIndex == 1) {
       slideIndex = slides.length;
     } else {
       slideIndex -= 1;
@@ -477,7 +481,7 @@ window.addEventListener('DOMContentLoaded', () => {
       current.textContent = slideIndex;
     }
 
-    changeOpacity(dots);
+    changeOpacity();
   });
 
   dots.forEach(dot => {
@@ -485,7 +489,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const slideTo = e.target.getAttribute('data-slide-to');
 
       slideIndex = slideTo;
-      offset = +width.replace(/\D/g, '') * (slideTo - 1);
+      offset = makeNumber(width) * (slideTo - 1);
 
       slidesField.style.transform = `translateX(-${offset}px)`;
 
@@ -495,7 +499,7 @@ window.addEventListener('DOMContentLoaded', () => {
         current.textContent = slideIndex;
       }
 
-      changeOpacity(dots);
+      changeOpacity();
     });
   });
 
