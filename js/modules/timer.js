@@ -1,7 +1,5 @@
-function timer() {
+function timer(id, deadLine) {
     // Timer
-
-    const deadLine = '2020-10-30';
 
     const endDate = document.querySelector('.promotion__descr');
     endDate.innerHTML = `
@@ -59,7 +57,7 @@ function timer() {
         }
     }
 
-    setClock('.timer', deadLine);
+    setClock(id, deadLine);
 }
 
-module.exports = timer;
+export default timer;
